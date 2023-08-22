@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Speudo - Typing Speed Test</title>
+    <link rel="stylesheet" href="speudo.css" />
+    <!-- Link to your CSS file -->
+  </head>
+  <body class="dark-mode">
+    <!-- Apply dark mode by default -->
+    <header class="header">
+      <h1 id="brand">Speudo!</h1>
+      <div class="author-dropdown">
+        <select id="author-select">
+          <option value="all">All Authors</option>
+          <!-- Add author options here dynamically using JavaScript -->
+        </select>
+      </div>
+    </header>
+    <div class="container">
+      <div class="text-container">
+        <p id="text-to-type">Loading...</p>
+        <p id="phonetic-transcription"></p>
+        <!-- Display phonetic transcription here -->
+        <p id="english-translation"></p>
+        <p id="text-info"></p>
+        <input type="text" id="user-input" placeholder="" autocomplete="off" />
+      </div>
+    </div>
+    <script src="speudo.js"></script>
+    <!-- Link to your JavaScript file -->
+  </body>
+</html>

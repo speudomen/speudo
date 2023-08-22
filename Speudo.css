@@ -1,0 +1,104 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.1
+  ); /* Transparent background for the header */
+  padding: 10px 20px;
+  align-items: center;
+}
+
+#brand {
+  color: rgb(149, 149, 149); /* Dark grey color for the brand */
+  margin: 0;
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: rgba(171, 132, 132, 0); /* Transparent background */
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.text-container {
+  margin-top: 20px;
+  text-align: left;
+}
+
+/* Style the text-to-type (Greek text) more prominently */
+#text-to-type {
+  font-size: 25px; /* Increase the font size */
+  font-weight: bold; /* Add boldness for prominence */
+}
+
+/* Style the English translation with less prominence */
+#english-translation {
+  font-size: 16px; /* Decrease the font size */
+}
+
+/* Style the text information (author and book title) similarly to the English translation */
+#text-info {
+  font-size: 16px;
+}
+
+button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 18px;
+  border: none;
+  background: rgba(255, 255, 255, 0.8); /* Transparent background */
+  border-radius: 5px;
+  margin-top: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+input[type="text"]:focus {
+  outline: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Style for the author dropdown */
+.author-dropdown {
+  display: flex;
+  align-items: center;
+}
+
+.author-dropdown select {
+  padding: 5px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+body.dark-mode {
+  background-color: #333;
+  color: #fff;
+}
