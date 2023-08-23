@@ -17,13 +17,6 @@ const sentences = [
     book: "Memorabilia",
   },
   {
-    greek: "οὐ θαυμαστὸν εἰ μὴ τούτων ἐνεθυμήθησαν;",
-    english:
-      "But is it not a wonder that they didn't take to heart what everyone knew?",
-    author: "Xenophon",
-    book: "Memorabilia",
-  },
-  {
     greek: "γενοῦ ὅποιος εἶ, μαθὼν τάδ᾽ ἔστιν.",
     english: "Become such as you are, having learned what that is.",
     author: "Pindar",
@@ -38,74 +31,76 @@ const englishTranslation = document.getElementById("english-translation");
 const textInfo = document.getElementById("text-info");
 const userInput = document.getElementById("user-input");
 const authorSelect = document.getElementById("author-select");
+const keyButton = document.getElementById("key-button");
+const keyContent = document.getElementById("key-content");
 
 let usedSentenceIndices = [];
-let currentSentenceIndex = -1; // Initialize with an invalid index
+let currentSentenceIndex;
 
-// Function to shuffle an array randomly
-function shuffleArray(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
-}
+// Find unique authors from the sentences array
+const authors = Array.from(new Set(sentences.map(sentence => sentence.author)));
+
+// Populate the select element with author options
+authors.forEach(author => {
+    const option = document.createElement("option");
+    option.value = author;
+    option.textContent = author;
+    authorSelect.appendChild(option);
+});
 
 function getRandomSentenceIndex(sentencesArray) {
-  const availableIndices = sentencesArray
-    .map((_, index) => index)
-    .filter((index) => !usedSentenceIndices.includes(index));
+    const availableIndices = sentencesArray
+        .map((_, index) => index)
+        .filter((index) => !usedSentenceIndices.includes(index));
 
-  if (availableIndices.length === 0) {
-    // All sentences have been used, reset the usedSentenceIndices array
-    usedSentenceIndices = [];
-    return getRandomSentenceIndex(sentencesArray); // Get a random sentence from the reset list
-  }
+    if (availableIndices.length === 0) {
+        // All sentences have been used, reset the usedSentenceIndices array
+        usedSentenceIndices = [];
+        return getRandomSentenceIndex(sentencesArray); // Get a random sentence from the reset list
+    }
 
-  return availableIndices[Math.floor(Math.random() * availableIndices.length)];
+    return availableIndices[Math.floor(Math.random() * availableIndices.length)];
 }
 
 function startTypingTest() {
-  // Determine which author is selected in the dropdown
-  const selectedAuthor = authorSelect.value;
+    // Determine which author is selected in the dropdown
+    const selectedAuthor = authorSelect.value;
 
-  // Filter the sentences based on the selected author or show all sentences
-  const filteredSentences =
-    selectedAuthor === "all"
-      ? sentences
-      : sentences.filter((sentence) => sentence.author === selectedAuthor);
+    // Filter the sentences based on the selected author or show all sentences
+    const filteredSentences = selectedAuthor === "all" ? sentences : sentences.filter(sentence => sentence.author === selectedAuthor);
 
-  // Ensure that the next sentence is not the current sentence or in the usedSentenceIndices
-  do {
+    // Update the display with the first sentence of the filtered list
     currentSentenceIndex = getRandomSentenceIndex(filteredSentences);
-  } while (
-    currentSentenceIndex === usedSentenceIndices[usedSentenceIndices.length - 1]
-  );
+    usedSentenceIndices.push(currentSentenceIndex);
 
-  usedSentenceIndices.push(currentSentenceIndex);
+    textToType.textContent = filteredSentences[currentSentenceIndex].greek;
+    englishTranslation.textContent = filteredSentences[currentSentenceIndex].english;
+    textInfo.textContent = `- ${filteredSentences[currentSentenceIndex].author}, ${filteredSentences[currentSentenceIndex].book}`;
 
-  textToType.textContent = filteredSentences[currentSentenceIndex].greek;
-  englishTranslation.textContent =
-    filteredSentences[currentSentenceIndex].english;
-  textInfo.textContent = `- ${filteredSentences[currentSentenceIndex].author}, ${filteredSentences[currentSentenceIndex].book}`;
-
-  userInput.value = "";
-  userInput.focus();
+    userInput.value = "";
+    userInput.focus();
 }
 
 // Add an event listener to the author dropdown
 authorSelect.addEventListener("change", () => {
-  usedSentenceIndices = []; // Clear the history when the author changes
-  userInput.value = ""; // Clear the textbox
-  startTypingTest();
+    userInput.value = ""; // Clear the textbox
+    startTypingTest();
 });
 
 // Add an event listener to the Enter key press
 userInput.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") {
-    e.preventDefault(); // Prevent the default form submission
-    userInput.value = ""; // Clear the textbox
-    startTypingTest();
+    if (e.key === "Enter") {
+        e.preventDefault(); // Prevent the default form submission
+        userInput.value = ""; // Clear the textbox
+        startTypingTest();
+    }
+});
+
+keyButton.addEventListener("click", () => {
+  if (keyContent.style.display === "block") {
+    keyContent.style.display = "none";
+  } else {
+    keyContent.style.display = "block";
   }
 });
 

@@ -68,7 +68,7 @@ button:hover {
 }
 
 input[type="text"] {
-  width: 100%;
+  width: 580px;
   padding: 10px;
   font-size: 18px;
   border: none;
@@ -101,4 +101,31 @@ input[type="text"]:focus {
 body.dark-mode {
   background-color: #333;
   color: #fff;
+}
+
+.key-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+#key-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#key-content {
+  display: none;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  position: absolute;
+  bottom: 100%;
+  right: 0;
+  z-index: 1;
 }
