@@ -16,6 +16,7 @@ const sentences = [
     author: "Xenophon",
     book: "Memorabilia",
   },
+
   {
     greek: "γενοῦ ὅποιος εἶ, μαθὼν τάδ᾽ ἔστιν.",
     english: "Become such as you are, having learned what that is.",
@@ -38,62 +39,68 @@ let usedSentenceIndices = [];
 let currentSentenceIndex;
 
 // Find unique authors from the sentences array
-const authors = Array.from(new Set(sentences.map(sentence => sentence.author)));
+const authors = Array.from(
+  new Set(sentences.map((sentence) => sentence.author))
+);
 
 // Populate the select element with author options
-authors.forEach(author => {
-    const option = document.createElement("option");
-    option.value = author;
-    option.textContent = author;
-    authorSelect.appendChild(option);
+authors.forEach((author) => {
+  const option = document.createElement("option");
+  option.value = author;
+  option.textContent = author;
+  authorSelect.appendChild(option);
 });
 
 function getRandomSentenceIndex(sentencesArray) {
-    const availableIndices = sentencesArray
-        .map((_, index) => index)
-        .filter((index) => !usedSentenceIndices.includes(index));
+  const availableIndices = sentencesArray
+    .map((_, index) => index)
+    .filter((index) => !usedSentenceIndices.includes(index));
 
-    if (availableIndices.length === 0) {
-        // All sentences have been used, reset the usedSentenceIndices array
-        usedSentenceIndices = [];
-        return getRandomSentenceIndex(sentencesArray); // Get a random sentence from the reset list
-    }
+  if (availableIndices.length === 0) {
+    // All sentences have been used, reset the usedSentenceIndices array
+    usedSentenceIndices = [];
+    return getRandomSentenceIndex(sentencesArray); // Get a random sentence from the reset list
+  }
 
-    return availableIndices[Math.floor(Math.random() * availableIndices.length)];
+  return availableIndices[Math.floor(Math.random() * availableIndices.length)];
 }
 
 function startTypingTest() {
-    // Determine which author is selected in the dropdown
-    const selectedAuthor = authorSelect.value;
+  // Determine which author is selected in the dropdown
+  const selectedAuthor = authorSelect.value;
 
-    // Filter the sentences based on the selected author or show all sentences
-    const filteredSentences = selectedAuthor === "all" ? sentences : sentences.filter(sentence => sentence.author === selectedAuthor);
+  // Filter the sentences based on the selected author or show all sentences
+  const filteredSentences =
+    selectedAuthor === "all"
+      ? sentences
+      : sentences.filter((sentence) => sentence.author === selectedAuthor);
 
-    // Update the display with the first sentence of the filtered list
-    currentSentenceIndex = getRandomSentenceIndex(filteredSentences);
-    usedSentenceIndices.push(currentSentenceIndex);
+  // Update the display with the first sentence of the filtered list
+  currentSentenceIndex = getRandomSentenceIndex(filteredSentences);
+  usedSentenceIndices.push(currentSentenceIndex);
 
-    textToType.textContent = filteredSentences[currentSentenceIndex].greek;
-    englishTranslation.textContent = filteredSentences[currentSentenceIndex].english;
-    textInfo.textContent = `- ${filteredSentences[currentSentenceIndex].author}, ${filteredSentences[currentSentenceIndex].book}`;
+  textToType.textContent = filteredSentences[currentSentenceIndex].greek;
+  englishTranslation.textContent =
+    filteredSentences[currentSentenceIndex].english;
+  textInfo.textContent = `- ${filteredSentences[currentSentenceIndex].author}, ${filteredSentences[currentSentenceIndex].book}`;
 
-    userInput.value = "";
-    userInput.focus();
+  userInput.value = "";
+  userInput.focus();
 }
 
 // Add an event listener to the author dropdown
 authorSelect.addEventListener("change", () => {
-    userInput.value = ""; // Clear the textbox
-    startTypingTest();
+  userInput.value = ""; // Clear the textbox
+  startTypingTest();
 });
 
 // Add an event listener to the Enter key press
 userInput.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-        e.preventDefault(); // Prevent the default form submission
-        userInput.value = ""; // Clear the textbox
-        startTypingTest();
-    }
+  if (e.key === "Enter") {
+    e.preventDefault(); // Prevent the default form submission
+    userInput.value = ""; // Clear the textbox
+    startTypingTest();
+  }
 });
 
 keyButton.addEventListener("click", () => {
