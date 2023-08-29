@@ -1,41 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Speudo - Typing Speed Test</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css">
     <!-- Link to your CSS file -->
-  </head>
-  <body class="dark-mode">
+</head>
+<body class="dark-mode">
     <!-- Apply dark mode by default -->
     <header class="header">
-      <h1 id="brand">Speudo!</h1>
-      <div class="author-dropdown">
-        <select id="author-select">
-          <option value="all">All Authors</option>
-          <!-- Add author options here dynamically using JavaScript -->
-        </select>
-      </div>
+        <h1 id="brand">Speudo!</h1>
+        <div class="author-dropdown">
+            <select id="author-select">
+                <option value="all">All Authors</option>
+                <!-- Add author options here dynamically using JavaScript -->
+            </select>
+        </div>
     </header>
     <div class="container">
-      <div class="text-container">
-        <p id="text-to-type">Loading...</p>
-        <p id="phonetic-transcription"></p>
-        <!-- Display phonetic transcription here -->
-        <p id="english-translation"></p>
-        <p id="text-info"></p>
-        <input type="text" id="user-input" placeholder="" autocomplete="off" />
-      </div>
+        <div class="text-container">
+            <p id="text-to-type">Loading...</p>
+            <p id="phonetic-transcription"></p>
+            <!-- Display phonetic transcription here -->
+            <p id="english-translation"></p>
+            <p id="text-info"></p>
+            <input type="text" id="user-input" placeholder="" autocomplete="off">
+        </div>
     </div>
-    <div class="key-container">
-      <button id="key-button">Greek Key</button>
-      <div id="key-content">
-        <!-- Your Polytonic Greek Keyboard Key Information Goes Here -->
-      </div>
-    </div>
+    <div>
+      <!-- Part of speech buttons -->
+<div class="parts-of-speech-buttons">
+  <button class="part-of-speech-button" data-part="noun">Noun</button>
+  <button class="part-of-speech-button" data-part="verb">Verb</button>
+  <!-- Add buttons for other parts of speech -->
+</div>
 
+<!-- Eraser button -->
+<button id="eraser-button">Eraser</button>
+    </div>
     <script src="script.js"></script>
     <!-- Link to your JavaScript file -->
-  </body>
+</body>
 </html>
